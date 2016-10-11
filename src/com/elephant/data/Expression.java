@@ -160,7 +160,7 @@ public class Expression {
 			newPoly = newPoly.substring(1);
 		}
 		System.out.println(newPoly);
-		
+		System.out.println("这是第一次修改的结果");
 	
 	}
 	

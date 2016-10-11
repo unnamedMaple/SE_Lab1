@@ -56,7 +56,7 @@ public class UserIn {
 		UserIn myuser = new UserIn();
 		while(!myuser.userinput.equals("exit"))//输入exit，程序退出
 		{
-			
+			System.out.println("这是第一次修改的结果");
 			myuser.userinput();
 			myuser.match();
 		}
