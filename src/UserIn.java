@@ -56,16 +56,20 @@ public class UserIn {
 		UserIn myuser = new UserIn();
 		while(!myuser.userinput.equals("exit"))//输入exit，程序退出
 		{
-			
+
+			//搭档1140310327做的修改System.out.println("这是第一次修改的结果");
+
 			myuser.userinput();
 			myuser.match();
 		}
 		
     }
 }
+
 //修改1
 //B2分支上的修改
 //实验场景2：分支管理.4
 //实验场景2：分支管理.5
 //解决冲突
+
 
