@@ -1,0 +1,12 @@
+Found a 8 line (35 tokens) duplication in the following files: 
+Starting at line 150 of E:\eclipse\workplace\Lab4\src\com\elephant\data\Expression.java
+Starting at line 261 of E:\eclipse\workplace\Lab4\src\com\elephant\data\Expression.java
+
+	if(newPoly.substring(0, 1).equals("+"))
+		{
+			newPoly = newPoly.substring(1);
+		}
+		System.out.println(newPoly);
+		
+	
+	}
