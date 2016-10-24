@@ -7,17 +7,34 @@ import java.util.regex.Pattern;
 public class Expression {
   String Polynomial;
 
-  //创建一个空的表达式
+  /**
+   * 创建一个空的表达式
+   */
   public Expression() {
     Polynomial = " ";
   }
 
-  //将当前表达式代替为用户输入
-  public void getExpression(String in) {
-    Polynomial = in + " ";//表达式末尾加一个空格，方便操作
+  /**
+   * 将当前表达式代替为用户输入
+   * @param theNowPoly 当前表达式
+   */
+  public void getExpression(final String theNowPoly) {
+    Polynomial = theNowPoly + " ";//表达式末尾加一个空格，方便操作
   }
 
-
+  /**
+   * 打印最后的表达式.
+   * @param newPoly 表达式
+   */
+  public void toPrint(String newPoly) {
+		if(newPoly.substring(0, 1).equals("+"))
+			{
+				newPoly = newPoly.substring(1);
+			}
+			System.out.println(newPoly);
+  }
+  
+  
   /**
    * 表达式化简求值，参数为用户输入命令.
    * @param commandOne 输入的命令
@@ -27,7 +44,7 @@ public class Expression {
     String[] cmds = commandOne.split(" ");//解析命令
     String[] veAndValue;
     String[] factorArray;
-    String simPoly = Polynomial;
+    final String simPoly = Polynomial;
     String sign = "";//存储符号位
     String mono = "";//存储单项式
     String newPoly = "";//存储新的表达式
@@ -145,15 +162,8 @@ public class Expression {
 		}
 	}
 	
-	
-	//打印最后的表达式
-	if(newPoly.substring(0, 1).equals("+"))
-		{
-			newPoly = newPoly.substring(1);
-		}
-		System.out.println(newPoly);
-		
-	
+	toPrint(newPoly);
+			
 	}
 	
 	
@@ -258,11 +268,7 @@ public class Expression {
 	 }
 	 else
 	 {
-		 if(newPoly.substring(0, 1).equals("+"))
-			 {
-				 newPoly=newPoly.substring(1);
-			 }
-			 System.out.println(newPoly);
+		 toPrint(newPoly);
 		 }
 	
 	 }
