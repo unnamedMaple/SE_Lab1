@@ -29,6 +29,8 @@ public class UserIn {
     Matcher expressionM = expressionP.matcher(userinput);
 
     Pattern simplifyP = Pattern.compile("!simplify((\\s*)([a-zA-Z]+=\\d+))*");
+    //此处不能匹配形如 !simplify y = 2 这样等号两边有空格的情况，修改正则表达式后仍然有问题，
+    //发现是用了字符数组中的元素的位置来确定变量的值，为了不做大的改动，这里没有修改
     final Matcher simplifyM = simplifyP.matcher(userinput);
 
     Pattern derivativeP = Pattern.compile("!d/d(\\s*)[a-zA-Z]+");
