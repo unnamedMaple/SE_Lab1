@@ -1,3 +1,4 @@
+
 import com.elephant.data.Expression;
 
 import java.util.*;
@@ -11,8 +12,8 @@ public class UserIn {
   Expression myexpression = new Expression();
 
   public void userinput() {
-    Scanner in = new Scanner(System.in);
-    userinput = in.nextLine();
+    Scanner theNowPoly = new Scanner(System.in);
+    userinput = theNowPoly.nextLine();
   }
 
 
@@ -28,10 +29,10 @@ public class UserIn {
     Matcher expressionM = expressionP.matcher(userinput);
 
     Pattern simplifyP = Pattern.compile("!simplify((\\s*)([a-zA-Z]+=\\d+))*");
-    Matcher simplifyM = simplifyP.matcher(userinput);
+    final Matcher simplifyM = simplifyP.matcher(userinput);
 
     Pattern derivativeP = Pattern.compile("!d/d(\\s*)[a-zA-Z]+");
-    Matcher derivativeM = derivativeP.matcher(userinput);
+    final Matcher derivativeM = derivativeP.matcher(userinput);
 
     if (expressionM.matches()) {
       myexpression.getExpression(userinput);
@@ -52,7 +53,7 @@ public class UserIn {
    * @param args 字符数组
    */
   public static void  main(String[] args) {
-    UserIn myuser = new UserIn();
+    final UserIn myuser = new UserIn();
     while (!myuser.userinput.equals("exit"))  { //输入exit，程序退出
       myuser.userinput();
       myuser.match();
