@@ -5,13 +5,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Expression {
-  String Polynomial;
+  String polyNomial;
 
   /**
    * 创建一个空的表达式
    */
   public Expression() {
-    Polynomial = " ";
+    polyNomial = " ";
   }
 
   /**
@@ -19,7 +19,7 @@ public class Expression {
    * @param theNowPoly 当前表达式
    */
   public void getExpression(final String theNowPoly) {
-    Polynomial = theNowPoly + " ";//表达式末尾加一个空格，方便操作
+    polyNomial = theNowPoly + " ";//表达式末尾加一个空格，方便操作
   }
 
   /**
@@ -44,7 +44,7 @@ public class Expression {
     String[] cmds = commandOne.split(" ");//解析命令
     String[] veAndValue;
     String[] factorArray;
-    final String simPoly = Polynomial;
+    final String simPoly = polyNomial;
     String sign = "";//存储符号位
     String mono = "";//存储单项式
     String newPoly = "";//存储新的表达式
@@ -60,6 +60,7 @@ public class Expression {
         factorArray = mono.split("\\*");//对单向式分割
         len = factorArray.length;
         String newMono = "";//存储处理后的单项式
+        //StringBuffer newMono = new StringBuffer();
         
         for (j = 0;j < len;j++) {
         
@@ -177,12 +178,12 @@ public class Expression {
 	 String[] cmd=command_two.split(" ");//命令解析
 	 String sign ="";
 	 
-	 int len=Polynomial.length(),i,L,j;
+	 int len=polyNomial.length(),i,L,j;
 	 int factor = 1;
 	 int n=0;
 	 for(i=0;i<len;i++)
 	 {
-		 if(Polynomial.substring(i, i+1).equals("+") || Polynomial.substring(i, i+1).equals("-") || i == len-1) 
+		 if(polyNomial.substring(i, i+1).equals("+") || polyNomial.substring(i, i+1).equals("-") || i == len-1) 
 	 {
 		
 		 Pattern monoP= Pattern.compile("("+cmd[1]+"(\\^\\d+)*)|(.*\\*("+cmd[1]+"(\\^\\d+)*))|(.*\\*("+cmd[1]+"(\\^\\d+)*)\\*.*)|(("+cmd[1]+"(\\^\\d+)*)+\\*.*)");
@@ -247,17 +248,17 @@ public class Expression {
 	}
 	
 	//处理下个单项式前，数据初始化
-	sign = Polynomial.substring(i, i+1);
+	sign = polyNomial.substring(i, i+1);
 	factor = 1;
 	mono = "";
 	newmono = "";
 	        n = 0;	 
 	 }
 	 
-	 else if(!Polynomial.substring(i, i+1).equals(" "))
+	 else if(!polyNomial.substring(i, i+1).equals(" "))
 		 {
 			 
-			 mono+=Polynomial.substring(i, i+1);
+			 mono+=polyNomial.substring(i, i+1);
 		 }
 		 
 		 				 
