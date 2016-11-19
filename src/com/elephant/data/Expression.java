@@ -25,144 +25,142 @@ public class Expression {
 		String[] cmds = command_one.split(" ");//解析命令
 		String[] ve_and_value;
 		String[] factor_array;
-		String simPoly = Polynomial;
+		String simPoly = Polynomial+" ";
 		String sign="";//存储符号位
 		String mono="";//存储单项式
 		String newPoly="";//存储新的表达式
 		int i,j,k,n,value,m;
 		int var_num = cmds.length,factor=1,len,num_m = 0,num=simPoly.length();
-		boolean matched = false;
-		
-		
-		
-	
-		
-		for(i=0;i<num;i++)
+		boolean matched = false;                                                 
+/*1*/   for(i=0;i<num;i++)           
 		{
 			//遇到+-号则表示，mono已经存储了一个单项式
-			if(simPoly.substring(i, i+1).equals("+") || simPoly.substring(i, i+1).equals("-") || i == num-1)
+/*2、3、4*/ if(simPoly.substring(i, i+1).equals("+") || 
+		      simPoly.substring(i, i+1).equals("-") ||
+		      i == num-1)
 			{
 				    
 					factor_array=mono.split("\\*");//对单向式分割
 					len=factor_array.length;
-					String new_mono="";//存储处理后的单项式
-		            for(j=0;j<len;j++)
+/*5*/				String new_mono="";//存储处理后的单项式              
+		            for(j=0;j<len;j++)//                                 
 		            {
-		            	if( factor_array[j].matches("\\d+") )
+/*7*/		            if( factor_array[j].matches("\\d+") )      
 		            	{
-		            		factor*= Integer.parseInt(factor_array[j]);
+/*8*/		            	factor*= Integer.parseInt(factor_array[j]); 
 		            	}
 		            	else
 		            	{
-		            		matched = false;
-		            		for(k = 1;k<var_num;k++)
+/*9*/		            	matched = false;
+/*10*/		            	for(k = 1;k<var_num;k++)
 		            		{
 		            			ve_and_value = cmds[k].split("=");
-		            			if(factor_array[j].matches(ve_and_value[0]))
-		            			{
+/*11*/		            		if(factor_array[j].matches(ve_and_value[0])) 
+		            			{ 
 		            				factor *= Integer.parseInt(ve_and_value[1]);
-		            				matched = true;
+/*12*/		            			matched = true;                            
 		            			}
-		            			else if(factor_array[j].matches(ve_and_value[0]+"\\^\\d+"))
+/*13*/		            		else if(factor_array[j].matches(ve_and_value[0]+"\\^\\d+")) 
 		            			{
 		            				n = Integer.parseInt(factor_array[j].split("\\^")[1]);
-		            				value = Integer.parseInt(ve_and_value[1]);
-		            				for(m=0;m<n;m++)
+/*14*/		            				value = Integer.parseInt(ve_and_value[1]);                
+/*15*/		            			for(m=0;m<n;m++)                                     
 		            				{
-		            					factor *= value;
+/*16*/		            				factor *= value;                                 
 		            				}
-		            				matched = true;
+/*17*/		            			matched = true;                                     
 		            			}
 		            		}
-		            		if(matched == false)
+/*18*/		            	if(matched == false)                                      
 		            		{
-		            			new_mono += "*" + factor_array[j];
+/*19*/		            		new_mono += "*" + factor_array[j];                     
 		            		}
 		            		
-		            	}
+						}
 		            }
 		            
 		            
 		            //对系数的处理
-		            if(factor!=1)
+/*20*/		        if(factor!=1)                                                   
 		            {
-		            	new_mono=factor+new_mono;
+/*21*/		            new_mono=factor+new_mono;                                   
 		            }
-		            else 
+					else 
 		            {
-		            	if( new_mono.equals(""))
+/*22*/		            if( new_mono.equals(""))                                    
 		            	{
-		            		 new_mono="1";
+/*23*/		            	new_mono="1";                                           
 		            	}
 		            	else
 		            	{
-		            		 new_mono=new_mono.substring(1);
+/*24*/		            	new_mono=new_mono.substring(1);                          
 		            	}
 		            	
 		           }
 		            
 		           
 		            //对纯整数项的处理
-		           if(new_mono.matches("\\d+"))
+/*25*/		       if(new_mono.matches("\\d+"))                                    
 		           {
-		        	   if(sign.equals("+")||(sign.equals("")))
+/*26 27*/		       if(sign.equals("+")||(sign.equals("")))                    
 		        	   {
-		        		   num_m+=Integer.parseInt(new_mono);
+/*28*/		        		num_m+=Integer.parseInt(new_mono);                    
 		        	   }
 		        	   else
 		        	   {
-		        		   num_m-=Integer.parseInt(new_mono);
+/*29*/		        	 	num_m-=Integer.parseInt(new_mono);                 
 		        	   }   
 		           }
-		           else
+		           else                                                        
 		           {
-		        	   if(factor != 0)
+/*30*/		           if(factor != 0)                                    
 		        	   {
-		        		  newPoly+=sign+new_mono;//y+4-4
+/*31*/		        		newPoly+=sign+new_mono;//y+4-4                
 		        	   }
 		           }
 		           
 		           //处理下个单项式前，数据初始化
-		           new_mono = "";
+/*32*/		       new_mono = "";
 		           factor = 1;
 		           mono = "";
-		           sign=simPoly.substring(i, i+1);
+		           sign=simPoly.substring(i, i+1);             
 			
 			}
-			else if(!simPoly.substring(i, i+1).equals(" "))//构建单项式
+/*33*/		else if(!simPoly.substring(i, i+1).equals(" "))//构建单项式      
 			{
-				mono+=simPoly.substring(i, i+1);
+/*34*/			mono+=simPoly.substring(i, i+1);                             
 			}
 			
 		}
 		
 		//将整数项追加到新的表达式末尾
-		if(num_m < 0)
+/*35*/	if(num_m < 0)                                                      
 		{
-			newPoly = newPoly+num_m;
+/*36*/ 		newPoly = newPoly+num_m;                                        
 		}
-		else if(num_m>0)
+/*37*/	else if(num_m>0)                                                     
 		{
-			newPoly =newPoly+"+"+ num_m;
+/*38*/		newPoly =newPoly+"+"+ num_m;                                     
 		}
 		else
 		{
-			if(newPoly.isEmpty())
+/*39*/		if(newPoly.isEmpty())                                            
 			{
-				newPoly = "0";
+/*40*/			newPoly = "0";                                                
 			}
 		}
 		
 		
 		//打印最后的表达式
-		if(newPoly.substring(0, 1).equals("+"))
+/*41*/	if(newPoly.substring(0, 1).equals("+"))                             
 		{
-			newPoly = newPoly.substring(1);
+/*42*/		newPoly = newPoly.substring(1);                               
 		}
-		return newPoly;
+/*43*/	return newPoly;                                                 
 		
 	
 	}
+
 	
 	
 	//表达式求导，参数为用户输入命令
